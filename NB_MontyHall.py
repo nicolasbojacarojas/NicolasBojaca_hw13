@@ -1,7 +1,8 @@
 import numpy as np
 import random
-a = [0,1]
-change = random.choice(a)
+N = 100
+TRUE =1
+FALSE = 0
 def sort_doors():
 	a = ['goat', 'goat', 'car' ]
 	random.shuffle(a)
@@ -26,3 +27,25 @@ def finish_game(lista, choice, change):
 		for i in range(len(lista)):
 			if (i != choice and lista[i] != 'GOAT_MONTY'):
 				return lista[i]
+def simulaciones(valor, N):
+	a = []
+	for i in range(N):
+		lista = sort_doors()
+		choice = choose_door()
+		lista_nueva = reveal_door(lista, choice)
+		a.append(finish_game(lista_nueva, choice, valor))
+	return a
+atrue = simulaciones(TRUE, N)
+afalse = simulaciones(FALSE, N)
+contadortrue = 0
+contadorfalse = 0
+for i in range(N):
+	if (atrue[i]=='car'):
+		contadortrue += 1
+	if (afalse[i]=='car'):
+		contadorfalse +=1
+probtrue = contadortrue/N
+probfalse = contadorfalse/N
+print ('la probabilidad de ganar el juego cambiando la puerta es de ', probtrue ,' y la probabilidad de ganar el juego sin cambiar de puerta es de ', probfalse)
+
+
