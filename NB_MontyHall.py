@@ -1,5 +1,7 @@
 import numpy as np
 import random
+a = [0,1]
+change = random.choice(a)
 def sort_doors():
 	a = ['goat', 'goat', 'car' ]
 	random.shuffle(a)
@@ -17,4 +19,10 @@ def reveal_door (lista, choice):
 					lista[i] = 'GOAT_MONTY'
 					contador += 1
 	return lista
-def finish_game 
+def finish_game(lista, choice, change):
+	if (bool(change)==False):
+		return lista[choice]
+	else:
+		for i in range(len(lista)):
+			if (i != choice and lista[i] != 'GOAT_MONTY'):
+				return lista[i]
